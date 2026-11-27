@@ -35,13 +35,13 @@ variable "timeout" {
 variable "throttle_rate_per_second" {
   type        = number
   description = "Steady-state requests/second across ALL callers (API Gateway stage throttle). Concurrency ~= rps x duration, so this keeps the demo to a sliver of the account's shared Lambda pool and caps worst-case abuse cost at a few dollars a month."
-  default     = 2
+  default     = 5
 }
 
 variable "throttle_burst" {
   type        = number
-  description = "Short burst allowance above the steady rate. Even if every burst request hits a cold start, at most this many Lambdas run at once."
-  default     = 4
+  description = "Short burst allowance above the steady rate. Even if every burst request hits a cold start, at most this many Lambdas run at once (3 per stack: three demo stacks can never exceed 9 of the account's 10 concurrent Lambdas, even if all start cold at once)."
+  default     = 3
 }
 
 variable "cors_allowed_origins" {

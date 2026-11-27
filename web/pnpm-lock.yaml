@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@srikarbolleddu/ml-demo-kit':
-        specifier: https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.1/srikarbolleddu-ml-demo-kit-0.1.1.tgz
-        version: https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.1/srikarbolleddu-ml-demo-kit-0.1.1.tgz(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.2/srikarbolleddu-ml-demo-kit-0.1.2.tgz
+        version: https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.2/srikarbolleddu-ml-demo-kit-0.1.2.tgz(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react:
         specifier: ^19.2.8
         version: 19.3.1
@@ -437,9 +437,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@srikarbolleddu/ml-demo-kit@https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.1/srikarbolleddu-ml-demo-kit-0.1.1.tgz':
-    resolution: {integrity: sha512-7s4yNy3DbSzwaNpSr1vpM8GclUFYEu6q3a5Ggrl5zdaR9XuMa8cHFoduxKwin98efVaBgb31ay/1WmQS8cm7TQ==, tarball: https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.1/srikarbolleddu-ml-demo-kit-0.1.1.tgz}
-    version: 0.1.1
+  '@srikarbolleddu/ml-demo-kit@https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.2/srikarbolleddu-ml-demo-kit-0.1.2.tgz':
+    resolution: {tarball: https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.2/srikarbolleddu-ml-demo-kit-0.1.2.tgz}
+    version: 0.1.2
     engines: {node: '>=20'}
     peerDependencies:
       react: ^18.2.0 || ^19.0.0
@@ -949,7 +949,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.68.8':
     optional: true
 
-  '@srikarbolleddu/ml-demo-kit@https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.1/srikarbolleddu-ml-demo-kit-0.1.1.tgz(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@srikarbolleddu/ml-demo-kit@https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.2/srikarbolleddu-ml-demo-kit-0.1.2.tgz(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
