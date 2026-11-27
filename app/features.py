@@ -239,7 +239,7 @@ FIELDS: tuple[Field, ...] = (
         "WAGE_OFFER_FROM",
         minimum=10_000,
         maximum=1_000_000,
-        step=1000,
+        step=0.01,  # hourly offers annualize to cents
         unit="USD",
     ),
     Field(
@@ -251,7 +251,7 @@ FIELDS: tuple[Field, ...] = (
         "PW_WAGE",
         minimum=50,
         maximum=400,
-        step=1,
+        step=0.1,
         unit="%",
     ),
     Field(
