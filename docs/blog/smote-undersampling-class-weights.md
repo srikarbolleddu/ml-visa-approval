@@ -141,8 +141,8 @@ input set to a typical value and shows how much the certification chance moved:
 
 ```python
 rows = [record] + [{**record, name: baseline[name]} for name in FEATURE_ORDER]
-risks = pipeline.predict_proba(records_to_frame(rows))[:, 1]   # one batched call
-contribution = (risks[1:] - risks[0]) * 100                     # percentage points
+risks = pipeline.predict_proba(records_to_frame(rows))[:, 1]  # one batched call
+contribution = (risks[1:] - risks[0]) * 100  # percentage points
 ```
 
 If a proxy is doing a lot of work, you can see it.
