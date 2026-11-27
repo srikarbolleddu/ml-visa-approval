@@ -169,7 +169,7 @@
     "optional": false,
     "min": 10000,
     "max": 1000000,
-    "step": 1000,
+    "step": 0.01,
     "unit": "USD"
    },
    {
@@ -181,7 +181,7 @@
     "optional": false,
     "min": 50,
     "max": 400,
-    "step": 1,
+    "step": 0.1,
     "unit": "%"
    },
    {
