@@ -1,0 +1,36 @@
+.vscode/*
+!.vscode/extensions.json
+
+### Python ###
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+### Env / secrets ###
+.env
+.env.*
+!.env.example
+
+### Terraform ###
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/backend.hcl
+infra/environments/*.tfvars
+!infra/environments/*.tfvars.example
+infra/.terraform.lock.hcl
+infra/crash.log
+
+### Data / build ###
+.data/
+web/node_modules/
+web/dist/
+infra/tfplan
+*.tfplan

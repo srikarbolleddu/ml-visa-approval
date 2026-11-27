@@ -1,0 +1,134 @@
+[
+  {
+    "title": "Certified: tech job on an H-1B",
+    "inputs": {
+      "employer_size": 2675,
+      "employer_founded": 1998,
+      "worker_ownership": "N",
+      "occupation_group": "15",
+      "annual_wage": 128086,
+      "wage_vs_prevailing": 100,
+      "wage_level": "Level IV",
+      "min_education": "Bachelor's",
+      "experience_months": 0,
+      "training_required": "N",
+      "professional_occupation": "Y",
+      "region": "west",
+      "worker_education": "Master's",
+      "visa_class": "H-1B",
+      "currently_employed": "Y",
+      "experience_with_employer": "N"
+    },
+    "actual": "certified"
+  },
+  {
+    "title": "Certified: small company",
+    "inputs": {
+      "employer_size": 37,
+      "employer_founded": 2001,
+      "worker_ownership": "N",
+      "occupation_group": "17",
+      "annual_wage": 92934,
+      "wage_vs_prevailing": 100,
+      "wage_level": "Level I",
+      "min_education": "Bachelor's",
+      "experience_months": 0,
+      "training_required": "N",
+      "professional_occupation": "Y",
+      "region": "west",
+      "worker_education": "Bachelor's",
+      "visa_class": "F-1",
+      "currently_employed": "Y",
+      "experience_with_employer": "not_stated"
+    },
+    "actual": "certified"
+  },
+  {
+    "title": "Certified, though the model flagged it",
+    "inputs": {
+      "employer_size": 400,
+      "employer_founded": 1988,
+      "worker_ownership": "N",
+      "occupation_group": "15",
+      "annual_wage": 109283,
+      "wage_vs_prevailing": 100,
+      "wage_level": "Level II",
+      "min_education": "Bachelor's",
+      "experience_months": 18,
+      "training_required": "N",
+      "professional_occupation": "Y",
+      "region": "northeast",
+      "worker_education": "Bachelor's",
+      "visa_class": "H-1B",
+      "currently_employed": "Y",
+      "experience_with_employer": "Y"
+    },
+    "actual": "certified"
+  },
+  {
+    "title": "Denied: low wage, small employer",
+    "inputs": {
+      "employer_size": 2,
+      "employer_founded": 2018,
+      "worker_ownership": "N",
+      "occupation_group": "39",
+      "annual_wage": 30014.4,
+      "wage_vs_prevailing": 96.2,
+      "wage_level": "not_stated",
+      "min_education": "High School",
+      "experience_months": 0,
+      "training_required": "N",
+      "professional_occupation": "Y",
+      "region": "west",
+      "worker_education": "High School",
+      "visa_class": "not_stated",
+      "currently_employed": "N",
+      "experience_with_employer": "Y"
+    },
+    "actual": "denied"
+  },
+  {
+    "title": "Denied: experience gained at the same employer",
+    "inputs": {
+      "employer_size": 1,
+      "employer_founded": 2021,
+      "worker_ownership": "Y",
+      "occupation_group": "31",
+      "annual_wage": 41600,
+      "wage_vs_prevailing": 100,
+      "wage_level": "not_stated",
+      "min_education": "Other",
+      "experience_months": 5,
+      "training_required": "Y",
+      "professional_occupation": "N",
+      "region": "west",
+      "worker_education": "Other",
+      "visa_class": "B-2",
+      "currently_employed": "Y",
+      "experience_with_employer": "Y"
+    },
+    "actual": "denied"
+  },
+  {
+    "title": "Denied, but the model missed it",
+    "inputs": {
+      "employer_size": 5,
+      "employer_founded": 1999,
+      "worker_ownership": "N",
+      "occupation_group": "11",
+      "annual_wage": 117832,
+      "wage_vs_prevailing": 100,
+      "wage_level": "Level I",
+      "min_education": "Bachelor's",
+      "experience_months": 48,
+      "training_required": "N",
+      "professional_occupation": "Y",
+      "region": "northeast",
+      "worker_education": "Bachelor's",
+      "visa_class": "not_stated",
+      "currently_employed": "N",
+      "experience_with_employer": "N"
+    },
+    "actual": "denied"
+  }
+]

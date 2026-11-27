@@ -1,0 +1,1309 @@
+{
+ "schema": {
+  "contract": "ml-demo-kit/v1",
+  "title": "Will this work-visa application be certified?",
+  "description": "Change the employer, the job offer or the worker's background and see how a gradient-boosting model's prediction, and the inputs driving it, change.",
+  "task": "classification",
+  "target": "certified",
+  "groups": [
+   {
+    "id": "employer",
+    "label": "Employer"
+   },
+   {
+    "id": "job",
+    "label": "Job offer"
+   },
+   {
+    "id": "worker",
+    "label": "Worker"
+   }
+  ],
+  "fields": [
+   {
+    "name": "employer_size",
+    "label": "Employees at the company",
+    "kind": "number",
+    "group": "employer",
+    "help": "Number of employees the sponsoring employer reported.",
+    "optional": false,
+    "min": 0,
+    "max": 2000000,
+    "step": 1,
+    "unit": "employees"
+   },
+   {
+    "name": "employer_founded",
+    "label": "Year the company started",
+    "kind": "number",
+    "group": "employer",
+    "help": "Year the employer commenced business.",
+    "optional": false,
+    "min": 1800,
+    "max": 2025,
+    "step": 1,
+    "unit": null
+   },
+   {
+    "name": "worker_ownership",
+    "label": "Worker owns part of the company?",
+    "kind": "category",
+    "group": "employer",
+    "help": "Whether the foreign worker has an ownership interest in the employer.",
+    "optional": false,
+    "options": [
+     {
+      "value": "Y",
+      "label": "Yes"
+     },
+     {
+      "value": "N",
+      "label": "No"
+     }
+    ]
+   },
+   {
+    "name": "occupation_group",
+    "label": "Occupation group",
+    "kind": "category",
+    "group": "job",
+    "help": "Standard Occupational Classification (SOC) major group of the job.",
+    "optional": false,
+    "options": [
+     {
+      "value": "11",
+      "label": "Management"
+     },
+     {
+      "value": "13",
+      "label": "Business & financial"
+     },
+     {
+      "value": "15",
+      "label": "Computer & mathematical"
+     },
+     {
+      "value": "17",
+      "label": "Architecture & engineering"
+     },
+     {
+      "value": "19",
+      "label": "Life, physical & social science"
+     },
+     {
+      "value": "21",
+      "label": "Community & social service"
+     },
+     {
+      "value": "23",
+      "label": "Legal"
+     },
+     {
+      "value": "25",
+      "label": "Education"
+     },
+     {
+      "value": "27",
+      "label": "Arts, design & media"
+     },
+     {
+      "value": "29",
+      "label": "Healthcare practitioners"
+     },
+     {
+      "value": "31",
+      "label": "Healthcare support"
+     },
+     {
+      "value": "35",
+      "label": "Food preparation & serving"
+     },
+     {
+      "value": "37",
+      "label": "Building & grounds maintenance"
+     },
+     {
+      "value": "39",
+      "label": "Personal care & service"
+     },
+     {
+      "value": "41",
+      "label": "Sales"
+     },
+     {
+      "value": "43",
+      "label": "Office & administrative support"
+     },
+     {
+      "value": "45",
+      "label": "Farming, fishing & forestry"
+     },
+     {
+      "value": "47",
+      "label": "Construction & extraction"
+     },
+     {
+      "value": "49",
+      "label": "Installation, maintenance & repair"
+     },
+     {
+      "value": "51",
+      "label": "Production"
+     },
+     {
+      "value": "53",
+      "label": "Transportation & material moving"
+     },
+     {
+      "value": "other",
+      "label": "Other"
+     }
+    ]
+   },
+   {
+    "name": "annual_wage",
+    "label": "Offered wage (per year)",
+    "kind": "number",
+    "group": "job",
+    "help": "The offered wage, converted to a yearly amount.",
+    "optional": false,
+    "min": 10000,
+    "max": 1000000,
+    "step": 1000,
+    "unit": "USD"
+   },
+   {
+    "name": "wage_vs_prevailing",
+    "label": "Offered wage vs prevailing wage",
+    "kind": "number",
+    "group": "job",
+    "help": "Offered wage as a percentage of the prevailing wage for this job and area.",
+    "optional": false,
+    "min": 50,
+    "max": 400,
+    "step": 1,
+    "unit": "%"
+   },
+   {
+    "name": "wage_level",
+    "label": "Prevailing wage level",
+    "kind": "category",
+    "group": "job",
+    "help": "DOL skill level of the prevailing wage (I = entry, IV = fully competent).",
+    "optional": false,
+    "options": [
+     {
+      "value": "Level I",
+      "label": "Level I"
+     },
+     {
+      "value": "Level II",
+      "label": "Level II"
+     },
+     {
+      "value": "Level III",
+      "label": "Level III"
+     },
+     {
+      "value": "Level IV",
+      "label": "Level IV"
+     },
+     {
+      "value": "not_stated",
+      "label": "Not stated"
+     }
+    ]
+   },
+   {
+    "name": "min_education",
+    "label": "Minimum education required",
+    "kind": "category",
+    "group": "job",
+    "help": "Minimum education the job requires.",
+    "optional": false,
+    "options": [
+     {
+      "value": "High School",
+      "label": "High school"
+     },
+     {
+      "value": "Associate's",
+      "label": "Associate's"
+     },
+     {
+      "value": "Bachelor's",
+      "label": "Bachelor's"
+     },
+     {
+      "value": "Master's",
+      "label": "Master's"
+     },
+     {
+      "value": "Doctorate",
+      "label": "Doctorate"
+     },
+     {
+      "value": "Other",
+      "label": "Other"
+     },
+     {
+      "value": "not_stated",
+      "label": "Not stated"
+     }
+    ]
+   },
+   {
+    "name": "experience_months",
+    "label": "Experience required",
+    "kind": "number",
+    "group": "job",
+    "help": "Months of experience the job requires (0 if none).",
+    "optional": false,
+    "min": 0,
+    "max": 240,
+    "step": 1,
+    "unit": "months"
+   },
+   {
+    "name": "training_required",
+    "label": "Training required?",
+    "kind": "category",
+    "group": "job",
+    "help": "Whether the job requires specific training.",
+    "optional": false,
+    "options": [
+     {
+      "value": "Y",
+      "label": "Yes"
+     },
+     {
+      "value": "N",
+      "label": "No"
+     }
+    ]
+   },
+   {
+    "name": "professional_occupation",
+    "label": "Professional occupation?",
+    "kind": "category",
+    "group": "job",
+    "help": "Whether the job is a professional occupation.",
+    "optional": false,
+    "options": [
+     {
+      "value": "Y",
+      "label": "Yes"
+     },
+     {
+      "value": "N",
+      "label": "No"
+     }
+    ]
+   },
+   {
+    "name": "region",
+    "label": "Worksite region",
+    "kind": "category",
+    "group": "job",
+    "help": "US Census region of the worksite.",
+    "optional": false,
+    "options": [
+     {
+      "value": "northeast",
+      "label": "Northeast"
+     },
+     {
+      "value": "midwest",
+      "label": "Midwest"
+     },
+     {
+      "value": "south",
+      "label": "South"
+     },
+     {
+      "value": "west",
+      "label": "West"
+     },
+     {
+      "value": "other",
+      "label": "Other / territory"
+     }
+    ]
+   },
+   {
+    "name": "worker_education",
+    "label": "Worker's education",
+    "kind": "category",
+    "group": "worker",
+    "help": "Highest education the worker has completed.",
+    "optional": false,
+    "options": [
+     {
+      "value": "High School",
+      "label": "High school"
+     },
+     {
+      "value": "Associate's",
+      "label": "Associate's"
+     },
+     {
+      "value": "Bachelor's",
+      "label": "Bachelor's"
+     },
+     {
+      "value": "Master's",
+      "label": "Master's"
+     },
+     {
+      "value": "Doctorate",
+      "label": "Doctorate"
+     },
+     {
+      "value": "Other",
+      "label": "Other"
+     },
+     {
+      "value": "not_stated",
+      "label": "Not stated"
+     }
+    ]
+   },
+   {
+    "name": "visa_class",
+    "label": "Current visa status",
+    "kind": "category",
+    "group": "worker",
+    "help": "The worker's current class of admission to the US.",
+    "optional": false,
+    "options": [
+     {
+      "value": "H-1B",
+      "label": "H-1B (specialty work)"
+     },
+     {
+      "value": "L-1",
+      "label": "L-1 (intra-company transfer)"
+     },
+     {
+      "value": "F-1",
+      "label": "F-1 (student)"
+     },
+     {
+      "value": "TN",
+      "label": "TN (USMCA professional)"
+     },
+     {
+      "value": "E-2",
+      "label": "E-2 (treaty investor)"
+     },
+     {
+      "value": "B-2",
+      "label": "B-2 (visitor)"
+     },
+     {
+      "value": "not_in_usa",
+      "label": "Not in the US"
+     },
+     {
+      "value": "other",
+      "label": "Other"
+     },
+     {
+      "value": "not_stated",
+      "label": "Not stated"
+     }
+    ]
+   },
+   {
+    "name": "currently_employed",
+    "label": "Worker currently employed?",
+    "kind": "category",
+    "group": "worker",
+    "help": "Whether the worker is currently employed.",
+    "optional": false,
+    "options": [
+     {
+      "value": "Y",
+      "label": "Yes"
+     },
+     {
+      "value": "N",
+      "label": "No"
+     }
+    ]
+   },
+   {
+    "name": "experience_with_employer",
+    "label": "Gained experience with this employer?",
+    "kind": "category",
+    "group": "worker",
+    "help": "Whether the required experience was gained with the sponsoring employer.",
+    "optional": false,
+    "options": [
+     {
+      "value": "Y",
+      "label": "Yes"
+     },
+     {
+      "value": "N",
+      "label": "No"
+     },
+     {
+      "value": "not_stated",
+      "label": "Not stated"
+     }
+    ]
+   }
+  ],
+  "model_version": "gbm-no-rebalancing-6a7d29e0",
+  "threshold": 0.77
+ },
+ "samples": [
+  {
+   "title": "Certified: tech job on an H-1B",
+   "inputs": {
+    "employer_size": 2675,
+    "employer_founded": 1998,
+    "worker_ownership": "N",
+    "occupation_group": "15",
+    "annual_wage": 128086,
+    "wage_vs_prevailing": 100,
+    "wage_level": "Level IV",
+    "min_education": "Bachelor's",
+    "experience_months": 0,
+    "training_required": "N",
+    "professional_occupation": "Y",
+    "region": "west",
+    "worker_education": "Master's",
+    "visa_class": "H-1B",
+    "currently_employed": "Y",
+    "experience_with_employer": "N"
+   },
+   "actual": "certified"
+  },
+  {
+   "title": "Certified: small company",
+   "inputs": {
+    "employer_size": 37,
+    "employer_founded": 2001,
+    "worker_ownership": "N",
+    "occupation_group": "17",
+    "annual_wage": 92934,
+    "wage_vs_prevailing": 100,
+    "wage_level": "Level I",
+    "min_education": "Bachelor's",
+    "experience_months": 0,
+    "training_required": "N",
+    "professional_occupation": "Y",
+    "region": "west",
+    "worker_education": "Bachelor's",
+    "visa_class": "F-1",
+    "currently_employed": "Y",
+    "experience_with_employer": "not_stated"
+   },
+   "actual": "certified"
+  },
+  {
+   "title": "Certified, though the model flagged it",
+   "inputs": {
+    "employer_size": 400,
+    "employer_founded": 1988,
+    "worker_ownership": "N",
+    "occupation_group": "15",
+    "annual_wage": 109283,
+    "wage_vs_prevailing": 100,
+    "wage_level": "Level II",
+    "min_education": "Bachelor's",
+    "experience_months": 18,
+    "training_required": "N",
+    "professional_occupation": "Y",
+    "region": "northeast",
+    "worker_education": "Bachelor's",
+    "visa_class": "H-1B",
+    "currently_employed": "Y",
+    "experience_with_employer": "Y"
+   },
+   "actual": "certified"
+  },
+  {
+   "title": "Denied: low wage, small employer",
+   "inputs": {
+    "employer_size": 2,
+    "employer_founded": 2018,
+    "worker_ownership": "N",
+    "occupation_group": "39",
+    "annual_wage": 30014.4,
+    "wage_vs_prevailing": 96.2,
+    "wage_level": "not_stated",
+    "min_education": "High School",
+    "experience_months": 0,
+    "training_required": "N",
+    "professional_occupation": "Y",
+    "region": "west",
+    "worker_education": "High School",
+    "visa_class": "not_stated",
+    "currently_employed": "N",
+    "experience_with_employer": "Y"
+   },
+   "actual": "denied"
+  },
+  {
+   "title": "Denied: experience gained at the same employer",
+   "inputs": {
+    "employer_size": 1,
+    "employer_founded": 2021,
+    "worker_ownership": "Y",
+    "occupation_group": "31",
+    "annual_wage": 41600,
+    "wage_vs_prevailing": 100,
+    "wage_level": "not_stated",
+    "min_education": "Other",
+    "experience_months": 5,
+    "training_required": "Y",
+    "professional_occupation": "N",
+    "region": "west",
+    "worker_education": "Other",
+    "visa_class": "B-2",
+    "currently_employed": "Y",
+    "experience_with_employer": "Y"
+   },
+   "actual": "denied"
+  },
+  {
+   "title": "Denied, but the model missed it",
+   "inputs": {
+    "employer_size": 5,
+    "employer_founded": 1999,
+    "worker_ownership": "N",
+    "occupation_group": "11",
+    "annual_wage": 117832,
+    "wage_vs_prevailing": 100,
+    "wage_level": "Level I",
+    "min_education": "Bachelor's",
+    "experience_months": 48,
+    "training_required": "N",
+    "professional_occupation": "Y",
+    "region": "northeast",
+    "worker_education": "Bachelor's",
+    "visa_class": "not_stated",
+    "currently_employed": "N",
+    "experience_with_employer": "N"
+   },
+   "actual": "denied"
+  }
+ ],
+ "explore": {
+  "contract": "ml-demo-kit/v1",
+  "headline": [
+   {
+    "label": "Denials caught",
+    "value": 0.5902,
+    "format": "percent",
+    "hint": "Recall on held-out applications"
+   },
+   {
+    "label": "Flags that were right",
+    "value": 0.6694,
+    "format": "percent",
+    "hint": "Precision, vs a 5.3% base rate"
+   },
+   {
+    "label": "PR-AUC",
+    "value": 0.667,
+    "format": "number",
+    "hint": "Ranking quality for denials"
+   },
+   {
+    "label": "Applications",
+    "value": 90379,
+    "format": "integer",
+    "hint": "DOL PERM decisions, FY2024"
+   }
+  ],
+  "charts": [
+   {
+    "id": "strategies",
+    "kind": "table",
+    "title": "SMOTE, undersampling or class weights?",
+    "caption": "Same model, four ways of handling a 5.3% denial rate (held-out test set). Training on the real, unbalanced data ranked denials best (PR-AUC 0.667); no rebalancing method beat it. Rebalancing also inflates the model's probabilities: it learns that denials are common (average predicted risk 16% for random undersampling vs 4.7% without). Chosen on validation: no rebalancing.",
+    "columns": [
+     {
+      "key": "model",
+      "label": "Strategy"
+     },
+     {
+      "key": "pr_auc",
+      "label": "PR-AUC",
+      "format": "number"
+     },
+     {
+      "key": "recall",
+      "label": "Recall",
+      "format": "percent"
+     },
+     {
+      "key": "precision",
+      "label": "Precision",
+      "format": "percent"
+     },
+     {
+      "key": "mean_predicted_risk",
+      "label": "Avg. predicted risk",
+      "format": "percent"
+     },
+     {
+      "key": "threshold",
+      "label": "Tuned cutoff",
+      "format": "number"
+     }
+    ],
+    "rows": [
+     {
+      "model": "No rebalancing",
+      "pr_auc": 0.667,
+      "recall": 0.5902,
+      "precision": 0.6694,
+      "brier": 0.0274,
+      "mean_predicted_risk": 0.0473,
+      "threshold": 0.23
+     },
+     {
+      "model": "Class weights",
+      "pr_auc": 0.6565,
+      "recall": 0.5757,
+      "precision": 0.7189,
+      "brier": 0.0375,
+      "mean_predicted_risk": 0.0821,
+      "threshold": 0.75
+     },
+     {
+      "model": "Random undersampling",
+      "pr_auc": 0.6004,
+      "recall": 0.5332,
+      "precision": 0.6261,
+      "brier": 0.0661,
+      "mean_predicted_risk": 0.1579,
+      "threshold": 0.83
+     },
+     {
+      "model": "SMOTE",
+      "pr_auc": 0.6283,
+      "recall": 0.5415,
+      "precision": 0.6444,
+      "brier": 0.0335,
+      "mean_predicted_risk": 0.0693,
+      "threshold": 0.52
+     }
+    ],
+    "highlight": {
+     "key": "model",
+     "value": "No rebalancing"
+    }
+   },
+   {
+    "id": "calibration",
+    "kind": "bar",
+    "title": "Rebalancing distorts probabilities",
+    "caption": "Average predicted denial risk on held-out applications, against the real denial rate. Only the unbalanced model's probabilities can be read as real chances; the others need their own tuned cutoff.",
+    "format": "percent",
+    "reference": {
+     "value": 0.0533,
+     "label": "Actual denial rate"
+    },
+    "items": [
+     {
+      "label": "No rebalancing",
+      "value": 0.0473
+     },
+     {
+      "label": "Class weights",
+      "value": 0.0821
+     },
+     {
+      "label": "Random undersampling",
+      "value": 0.1579
+     },
+     {
+      "label": "SMOTE",
+      "value": 0.0693
+     }
+    ]
+   },
+   {
+    "id": "threshold",
+    "kind": "threshold",
+    "title": "Flagging applications for review",
+    "caption": "Applications with denial risk above the cutoff are flagged. Lower it to catch more denials, at the cost of flagging more applications that would have been certified.",
+    "positive_label": "Denied",
+    "negative_label": "Certified",
+    "selected": 0.23,
+    "sweep": [
+     {
+      "threshold": 0.05,
+      "tn": 15322,
+      "fp": 1790,
+      "fn": 223,
+      "tp": 741
+     },
+     {
+      "threshold": 0.1,
+      "tn": 16309,
+      "fp": 803,
+      "fn": 307,
+      "tp": 657
+     },
+     {
+      "threshold": 0.15,
+      "tn": 16632,
+      "fp": 480,
+      "fn": 354,
+      "tp": 610
+     },
+     {
+      "threshold": 0.2,
+      "tn": 16761,
+      "fp": 351,
+      "fn": 379,
+      "tp": 585
+     },
+     {
+      "threshold": 0.25,
+      "tn": 16902,
+      "fp": 210,
+      "fn": 423,
+      "tp": 541
+     },
+     {
+      "threshold": 0.3,
+      "tn": 16941,
+      "fp": 171,
+      "fn": 446,
+      "tp": 518
+     },
+     {
+      "threshold": 0.35,
+      "tn": 16977,
+      "fp": 135,
+      "fn": 456,
+      "tp": 508
+     },
+     {
+      "threshold": 0.4,
+      "tn": 17002,
+      "fp": 110,
+      "fn": 473,
+      "tp": 491
+     },
+     {
+      "threshold": 0.45,
+      "tn": 17022,
+      "fp": 90,
+      "fn": 491,
+      "tp": 473
+     },
+     {
+      "threshold": 0.5,
+      "tn": 17033,
+      "fp": 79,
+      "fn": 505,
+      "tp": 459
+     },
+     {
+      "threshold": 0.55,
+      "tn": 17049,
+      "fp": 63,
+      "fn": 524,
+      "tp": 440
+     },
+     {
+      "threshold": 0.6,
+      "tn": 17058,
+      "fp": 54,
+      "fn": 539,
+      "tp": 425
+     },
+     {
+      "threshold": 0.65,
+      "tn": 17066,
+      "fp": 46,
+      "fn": 558,
+      "tp": 406
+     },
+     {
+      "threshold": 0.7,
+      "tn": 17079,
+      "fp": 33,
+      "fn": 580,
+      "tp": 384
+     },
+     {
+      "threshold": 0.75,
+      "tn": 17084,
+      "fp": 28,
+      "fn": 593,
+      "tp": 371
+     },
+     {
+      "threshold": 0.8,
+      "tn": 17088,
+      "fp": 24,
+      "fn": 616,
+      "tp": 348
+     },
+     {
+      "threshold": 0.85,
+      "tn": 17098,
+      "fp": 14,
+      "fn": 639,
+      "tp": 325
+     },
+     {
+      "threshold": 0.9,
+      "tn": 17106,
+      "fp": 6,
+      "fn": 692,
+      "tp": 272
+     },
+     {
+      "threshold": 0.95,
+      "tn": 17110,
+      "fp": 2,
+      "fn": 776,
+      "tp": 188
+     }
+    ]
+   },
+   {
+    "id": "importance",
+    "kind": "bar",
+    "title": "What the model relies on",
+    "caption": "How much ranking quality drops when each input is shuffled (permutation importance on validation data). Nationality is deliberately not an input.",
+    "format": "number",
+    "items": [
+     {
+      "label": "Employees at the company",
+      "value": 0.2875
+     },
+     {
+      "label": "Occupation group",
+      "value": 0.2215
+     },
+     {
+      "label": "Offered wage (per year)",
+      "value": 0.1841
+     },
+     {
+      "label": "Year the company started",
+      "value": 0.1417
+     },
+     {
+      "label": "Offered wage vs prevailing wage",
+      "value": 0.0651
+     },
+     {
+      "label": "Minimum education required",
+      "value": 0.0482
+     },
+     {
+      "label": "Experience required",
+      "value": 0.0382
+     },
+     {
+      "label": "Prevailing wage level",
+      "value": 0.0355
+     },
+     {
+      "label": "Worksite region",
+      "value": 0.0343
+     },
+     {
+      "label": "Current visa status",
+      "value": 0.03
+     }
+    ]
+   },
+   {
+    "id": "rate-size",
+    "kind": "bar",
+    "title": "Denial rate by employer size",
+    "caption": "Employers with 10 or fewer staff are denied 16% of the time; those with over 10,000 only 2%.",
+    "format": "percent",
+    "reference": {
+     "value": 0.0533,
+     "label": "Overall"
+    },
+    "items": [
+     {
+      "label": "≤10",
+      "value": 0.1615
+     },
+     {
+      "label": "11–50",
+      "value": 0.0941
+     },
+     {
+      "label": "51–250",
+      "value": 0.064
+     },
+     {
+      "label": "251–1k",
+      "value": 0.0519
+     },
+     {
+      "label": "1k–10k",
+      "value": 0.0322
+     },
+     {
+      "label": "10k+",
+      "value": 0.0206
+     }
+    ]
+   },
+   {
+    "id": "rate-wage",
+    "kind": "bar",
+    "title": "Denial rate by offered wage vs prevailing wage",
+    "caption": "Offers at 150%+ of the prevailing wage are denied 2.5% of the time; offers within 20% of it, up to 6.8%.",
+    "format": "percent",
+    "reference": {
+     "value": 0.0533,
+     "label": "Overall"
+    },
+    "items": [
+     {
+      "label": "Below 100%",
+      "value": 0.0579
+     },
+     {
+      "label": "100–105%",
+      "value": 0.0576
+     },
+     {
+      "label": "105–120%",
+      "value": 0.0679
+     },
+     {
+      "label": "120–150%",
+      "value": 0.0402
+     },
+     {
+      "label": "150%+",
+      "value": 0.0254
+     }
+    ]
+   },
+   {
+    "id": "rate-visa",
+    "kind": "bar",
+    "title": "Denial rate by the worker's current visa",
+    "caption": "Workers already on an H-1B (2.5%) or L-1 (1.8%) are rarely denied; visitors on a B-2 much more often (15%).",
+    "format": "percent",
+    "reference": {
+     "value": 0.0533,
+     "label": "Overall"
+    },
+    "items": [
+     {
+      "label": "H-1B (specialty work)",
+      "value": 0.025
+     },
+     {
+      "label": "L-1 (intra-company transfer)",
+      "value": 0.0178
+     },
+     {
+      "label": "F-1 (student)",
+      "value": 0.0604
+     },
+     {
+      "label": "TN (USMCA professional)",
+      "value": 0.0374
+     },
+     {
+      "label": "E-2 (treaty investor)",
+      "value": 0.0942
+     },
+     {
+      "label": "B-2 (visitor)",
+      "value": 0.1508
+     },
+     {
+      "label": "Not in the US",
+      "value": 0.0776
+     },
+     {
+      "label": "Other",
+      "value": 0.1855
+     },
+     {
+      "label": "Not stated",
+      "value": 0.1133
+     }
+    ]
+   }
+  ]
+ },
+ "predictions": [
+  {
+   "task": "classification",
+   "score": 0.9963,
+   "score_label": "Chance of certification",
+   "threshold": 0.77,
+   "positive": true,
+   "outcome": "Likely certified",
+   "explanation": {
+    "kind": "contributions",
+    "title": "What moved the prediction",
+    "value_label": "Change in certification chance (percentage points) compared with a typical application",
+    "steps": [
+     {
+      "label": "Employees at the company: 2,675 employees",
+      "field": "employer_size",
+      "value": 0.1
+     },
+     {
+      "label": "Offered wage (per year): $128,086",
+      "field": "annual_wage",
+      "value": 0.1
+     },
+     {
+      "label": "Offered wage vs prevailing wage: 100%",
+      "field": "wage_vs_prevailing",
+      "value": 0.1
+     }
+    ]
+   },
+   "model_version": "gbm-no-rebalancing-6a7d29e0"
+  },
+  {
+   "task": "classification",
+   "score": 0.9666,
+   "score_label": "Chance of certification",
+   "threshold": 0.77,
+   "positive": true,
+   "outcome": "Likely certified",
+   "explanation": {
+    "kind": "contributions",
+    "title": "What moved the prediction",
+    "value_label": "Change in certification chance (percentage points) compared with a typical application",
+    "steps": [
+     {
+      "label": "Offered wage vs prevailing wage: 100%",
+      "field": "wage_vs_prevailing",
+      "value": 2.1
+     },
+     {
+      "label": "Current visa status: F-1 (student)",
+      "field": "visa_class",
+      "value": 2.1
+     },
+     {
+      "label": "Employees at the company: 37 employees",
+      "field": "employer_size",
+      "value": -1.9
+     },
+     {
+      "label": "Occupation group: Architecture & engineering",
+      "field": "occupation_group",
+      "value": -0.7
+     },
+     {
+      "label": "Worksite region: West",
+      "field": "region",
+      "value": -0.5
+     },
+     {
+      "label": "Offered wage (per year): $92,934",
+      "field": "annual_wage",
+      "value": -0.3
+     }
+    ]
+   },
+   "model_version": "gbm-no-rebalancing-6a7d29e0"
+  },
+  {
+   "task": "classification",
+   "score": 0.6652,
+   "score_label": "Chance of certification",
+   "threshold": 0.77,
+   "positive": false,
+   "outcome": "At risk of denial",
+   "explanation": {
+    "kind": "contributions",
+    "title": "What moved the prediction",
+    "value_label": "Change in certification chance (percentage points) compared with a typical application",
+    "steps": [
+     {
+      "label": "Gained experience with this employer: Yes",
+      "field": "experience_with_employer",
+      "value": -31.6
+     },
+     {
+      "label": "Employees at the company: 400 employees",
+      "field": "employer_size",
+      "value": -26.7
+     },
+     {
+      "label": "Prevailing wage level: Level II",
+      "field": "wage_level",
+      "value": -25.3
+     },
+     {
+      "label": "Worksite region: Northeast",
+      "field": "region",
+      "value": 10.5
+     },
+     {
+      "label": "Year the company started: 1988",
+      "field": "employer_founded",
+      "value": 8.2
+     },
+     {
+      "label": "Offered wage (per year): $109,283",
+      "field": "annual_wage",
+      "value": -7.7
+     }
+    ]
+   },
+   "model_version": "gbm-no-rebalancing-6a7d29e0"
+  },
+  {
+   "task": "classification",
+   "score": 0.0201,
+   "score_label": "Chance of certification",
+   "threshold": 0.77,
+   "positive": false,
+   "outcome": "At risk of denial",
+   "explanation": {
+    "kind": "contributions",
+    "title": "What moved the prediction",
+    "value_label": "Change in certification chance (percentage points) compared with a typical application",
+    "steps": [
+     {
+      "label": "Prevailing wage level: Not stated",
+      "field": "wage_level",
+      "value": -29.6
+     },
+     {
+      "label": "Gained experience with this employer: Yes",
+      "field": "experience_with_employer",
+      "value": -24.0
+     },
+     {
+      "label": "Employees at the company: 2 employees",
+      "field": "employer_size",
+      "value": -4.0
+     },
+     {
+      "label": "Occupation group: Personal care & service",
+      "field": "occupation_group",
+      "value": -3.5
+     },
+     {
+      "label": "Worksite region: West",
+      "field": "region",
+      "value": -1.4
+     },
+     {
+      "label": "Current visa status: Not stated",
+      "field": "visa_class",
+      "value": -1.3
+     }
+    ]
+   },
+   "model_version": "gbm-no-rebalancing-6a7d29e0"
+  },
+  {
+   "task": "classification",
+   "score": 0.0312,
+   "score_label": "Chance of certification",
+   "threshold": 0.77,
+   "positive": false,
+   "outcome": "At risk of denial",
+   "explanation": {
+    "kind": "contributions",
+    "title": "What moved the prediction",
+    "value_label": "Change in certification chance (percentage points) compared with a typical application",
+    "steps": [
+     {
+      "label": "Employees at the company: 1 employee",
+      "field": "employer_size",
+      "value": -25.2
+     },
+     {
+      "label": "Year the company started: 2021",
+      "field": "employer_founded",
+      "value": -24.6
+     },
+     {
+      "label": "Training required: Yes",
+      "field": "training_required",
+      "value": -24.5
+     },
+     {
+      "label": "Gained experience with this employer: Yes",
+      "field": "experience_with_employer",
+      "value": -14.1
+     },
+     {
+      "label": "Worker's education: Other",
+      "field": "worker_education",
+      "value": -6.7
+     },
+     {
+      "label": "Prevailing wage level: Not stated",
+      "field": "wage_level",
+      "value": -2.5
+     }
+    ]
+   },
+   "model_version": "gbm-no-rebalancing-6a7d29e0"
+  },
+  {
+   "task": "classification",
+   "score": 0.7723,
+   "score_label": "Chance of certification",
+   "threshold": 0.77,
+   "positive": true,
+   "outcome": "Likely certified",
+   "explanation": {
+    "kind": "contributions",
+    "title": "What moved the prediction",
+    "value_label": "Change in certification chance (percentage points) compared with a typical application",
+    "steps": [
+     {
+      "label": "Worksite region: Northeast",
+      "field": "region",
+      "value": 22.4
+     },
+     {
+      "label": "Employees at the company: 5 employees",
+      "field": "employer_size",
+      "value": -21.7
+     },
+     {
+      "label": "Offered wage (per year): $117,832",
+      "field": "annual_wage",
+      "value": -15.9
+     },
+     {
+      "label": "Current visa status: Not stated",
+      "field": "visa_class",
+      "value": -12.9
+     },
+     {
+      "label": "Occupation group: Management",
+      "field": "occupation_group",
+      "value": -11.6
+     },
+     {
+      "label": "Experience required: 48 months",
+      "field": "experience_months",
+      "value": -10.1
+     }
+    ]
+   },
+   "model_version": "gbm-no-rebalancing-6a7d29e0"
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v5
+      - run: uv python install
+      - run: uv sync --frozen
+      - name: Lint and format
+        run: uv run ruff check . && uv run ruff format --check .
+      - name: Type check
+        run: uv run ty check
+      - name: Tests (incl. golden predictions) with coverage
+        run: uv run coverage run -m pytest -q && uv run coverage report
+      - name: Security lint
+        run: uv run bandit -q -r app training
+      - name: Dependency audit
+        run: uv run pip-audit --skip-editable
+
+  image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build Lambda image
+        run: docker build -f Dockerfile.lambda -t demo:ci .
+      - name: Smoke-test the image with the Lambda runtime emulator
+        run: |
+          docker run -d --name demo -p 9000:8080 demo:ci
+          python3 scripts/smoke_lambda.py http://localhost:9000
+
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: web/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm audit --prod

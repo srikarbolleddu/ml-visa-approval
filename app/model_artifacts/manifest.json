@@ -1,0 +1,32 @@
+{
+  "model_version": "gbm-no-rebalancing-6a7d29e0",
+  "model": "Gradient boosting (no rebalancing)",
+  "params": {
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 63
+  },
+  "denial_threshold": 0.23,
+  "baseline": {
+    "employer_size": 1900.0,
+    "employer_founded": 1998.0,
+    "annual_wage": 107341.0,
+    "wage_vs_prevailing": 100.52271813429836,
+    "experience_months": 3.0,
+    "worker_ownership": "N",
+    "occupation_group": "15",
+    "wage_level": "Level I",
+    "min_education": "Bachelor's",
+    "training_required": "N",
+    "professional_occupation": "Y",
+    "region": "south",
+    "worker_education": "Master's",
+    "visa_class": "H-1B",
+    "currently_employed": "Y",
+    "experience_with_employer": "N"
+  },
+  "dataset": {
+    "url": "https://www.dol.gov/sites/dolgov/files/ETA/oflc/pdfs/PERM_Disclosure_Data_FY2024_Q4.xlsx",
+    "sha256": "57fd1d69396113d04f1a02bb05baa3c0c1f2a393e3ad6bb9b69fa2b55291bee2",
+    "license": "Public domain (US DOL)"
+  }
+}

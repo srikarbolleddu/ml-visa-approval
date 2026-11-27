@@ -1,0 +1,59 @@
+name: Deploy
+
+# Deploys the demo API. Runs only for pushes to main (never for pull requests or forks) and only
+# inside the `production` environment, which requires the repo owner's approval -- and the AWS
+# deploy role trusts nothing but that environment (infra/oidc.tf).
+on:
+  push:
+    branches: [main]
+    # The demo page, docs and training code don't change the API image.
+    paths-ignore: ["web/**", "docs/**", "reports/**", "training/**", "**/*.md", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  id-token: write # OIDC: short-lived AWS credentials, no stored keys
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - uses: aws-actions/amazon-ecr-login@v2
+        id: ecr
+
+      - name: Build & push Lambda image
+        env:
+          IMAGE: ${{ steps.ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
+        run: |
+          # --provenance=false: Lambda rejects OCI image indexes (which provenance attestations create).
+          docker build --provenance=false --platform linux/amd64 -f Dockerfile.lambda -t "$IMAGE" .
+          docker push "$IMAGE"
+
+      - name: Update Lambda function
+        env:
+          IMAGE: ${{ steps.ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
+          FUNCTION: ${{ vars.LAMBDA_FUNCTION_NAME }}
+        run: |
+          aws lambda update-function-code --function-name "$FUNCTION" --image-uri "$IMAGE" >/dev/null
+          aws lambda wait function-updated --function-name "$FUNCTION"
+
+      - name: Smoke-test the live API
+        run: python3 scripts/smoke_http.py "${{ vars.DEMO_API_URL }}"
+
+# Repo variables (Settings → Secrets and variables → Actions → Variables), from `terraform output`:
+#   AWS_REGION, AWS_DEPLOY_ROLE_ARN, ECR_REPOSITORY, LAMBDA_FUNCTION_NAME, DEMO_API_URL

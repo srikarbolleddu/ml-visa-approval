@@ -1,0 +1,315 @@
+{
+  "strategy_comparison": [
+    {
+      "model": "No rebalancing",
+      "pr_auc": 0.667,
+      "recall": 0.5902,
+      "precision": 0.6694,
+      "brier": 0.0274,
+      "mean_predicted_risk": 0.0473,
+      "threshold": 0.23
+    },
+    {
+      "model": "Class weights",
+      "pr_auc": 0.6565,
+      "recall": 0.5757,
+      "precision": 0.7189,
+      "brier": 0.0375,
+      "mean_predicted_risk": 0.0821,
+      "threshold": 0.75
+    },
+    {
+      "model": "Random undersampling",
+      "pr_auc": 0.6004,
+      "recall": 0.5332,
+      "precision": 0.6261,
+      "brier": 0.0661,
+      "mean_predicted_risk": 0.1579,
+      "threshold": 0.83
+    },
+    {
+      "model": "SMOTE",
+      "pr_auc": 0.6283,
+      "recall": 0.5415,
+      "precision": 0.6444,
+      "brier": 0.0335,
+      "mean_predicted_risk": 0.0693,
+      "threshold": 0.52
+    }
+  ],
+  "feature_importance": [
+    {
+      "field": "employer_size",
+      "label": "Employees at the company",
+      "importance": 0.2875
+    },
+    {
+      "field": "occupation_group",
+      "label": "Occupation group",
+      "importance": 0.2215
+    },
+    {
+      "field": "annual_wage",
+      "label": "Offered wage (per year)",
+      "importance": 0.1841
+    },
+    {
+      "field": "employer_founded",
+      "label": "Year the company started",
+      "importance": 0.1417
+    },
+    {
+      "field": "wage_vs_prevailing",
+      "label": "Offered wage vs prevailing wage",
+      "importance": 0.0651
+    },
+    {
+      "field": "min_education",
+      "label": "Minimum education required",
+      "importance": 0.0482
+    },
+    {
+      "field": "experience_months",
+      "label": "Experience required",
+      "importance": 0.0382
+    },
+    {
+      "field": "wage_level",
+      "label": "Prevailing wage level",
+      "importance": 0.0355
+    },
+    {
+      "field": "region",
+      "label": "Worksite region",
+      "importance": 0.0343
+    },
+    {
+      "field": "visa_class",
+      "label": "Current visa status",
+      "importance": 0.03
+    }
+  ],
+  "threshold_sweep": [
+    {
+      "threshold": 0.05,
+      "tn": 15322,
+      "fp": 1790,
+      "fn": 223,
+      "tp": 741
+    },
+    {
+      "threshold": 0.1,
+      "tn": 16309,
+      "fp": 803,
+      "fn": 307,
+      "tp": 657
+    },
+    {
+      "threshold": 0.15,
+      "tn": 16632,
+      "fp": 480,
+      "fn": 354,
+      "tp": 610
+    },
+    {
+      "threshold": 0.2,
+      "tn": 16761,
+      "fp": 351,
+      "fn": 379,
+      "tp": 585
+    },
+    {
+      "threshold": 0.25,
+      "tn": 16902,
+      "fp": 210,
+      "fn": 423,
+      "tp": 541
+    },
+    {
+      "threshold": 0.3,
+      "tn": 16941,
+      "fp": 171,
+      "fn": 446,
+      "tp": 518
+    },
+    {
+      "threshold": 0.35,
+      "tn": 16977,
+      "fp": 135,
+      "fn": 456,
+      "tp": 508
+    },
+    {
+      "threshold": 0.4,
+      "tn": 17002,
+      "fp": 110,
+      "fn": 473,
+      "tp": 491
+    },
+    {
+      "threshold": 0.45,
+      "tn": 17022,
+      "fp": 90,
+      "fn": 491,
+      "tp": 473
+    },
+    {
+      "threshold": 0.5,
+      "tn": 17033,
+      "fp": 79,
+      "fn": 505,
+      "tp": 459
+    },
+    {
+      "threshold": 0.55,
+      "tn": 17049,
+      "fp": 63,
+      "fn": 524,
+      "tp": 440
+    },
+    {
+      "threshold": 0.6,
+      "tn": 17058,
+      "fp": 54,
+      "fn": 539,
+      "tp": 425
+    },
+    {
+      "threshold": 0.65,
+      "tn": 17066,
+      "fp": 46,
+      "fn": 558,
+      "tp": 406
+    },
+    {
+      "threshold": 0.7,
+      "tn": 17079,
+      "fp": 33,
+      "fn": 580,
+      "tp": 384
+    },
+    {
+      "threshold": 0.75,
+      "tn": 17084,
+      "fp": 28,
+      "fn": 593,
+      "tp": 371
+    },
+    {
+      "threshold": 0.8,
+      "tn": 17088,
+      "fp": 24,
+      "fn": 616,
+      "tp": 348
+    },
+    {
+      "threshold": 0.85,
+      "tn": 17098,
+      "fp": 14,
+      "fn": 639,
+      "tp": 325
+    },
+    {
+      "threshold": 0.9,
+      "tn": 17106,
+      "fp": 6,
+      "fn": 692,
+      "tp": 272
+    },
+    {
+      "threshold": 0.95,
+      "tn": 17110,
+      "fp": 2,
+      "fn": 776,
+      "tp": 188
+    }
+  ],
+  "denial_rate_by": {
+    "employer_size": [
+      {
+        "label": "\u226410",
+        "value": 0.1615
+      },
+      {
+        "label": "11\u201350",
+        "value": 0.0941
+      },
+      {
+        "label": "51\u2013250",
+        "value": 0.064
+      },
+      {
+        "label": "251\u20131k",
+        "value": 0.0519
+      },
+      {
+        "label": "1k\u201310k",
+        "value": 0.0322
+      },
+      {
+        "label": "10k+",
+        "value": 0.0206
+      }
+    ],
+    "wage_vs_prevailing": [
+      {
+        "label": "Below 100%",
+        "value": 0.0579
+      },
+      {
+        "label": "100\u2013105%",
+        "value": 0.0576
+      },
+      {
+        "label": "105\u2013120%",
+        "value": 0.0679
+      },
+      {
+        "label": "120\u2013150%",
+        "value": 0.0402
+      },
+      {
+        "label": "150%+",
+        "value": 0.0254
+      }
+    ],
+    "visa_class": [
+      {
+        "label": "H-1B (specialty work)",
+        "value": 0.025
+      },
+      {
+        "label": "L-1 (intra-company transfer)",
+        "value": 0.0178
+      },
+      {
+        "label": "F-1 (student)",
+        "value": 0.0604
+      },
+      {
+        "label": "TN (USMCA professional)",
+        "value": 0.0374
+      },
+      {
+        "label": "E-2 (treaty investor)",
+        "value": 0.0942
+      },
+      {
+        "label": "B-2 (visitor)",
+        "value": 0.1508
+      },
+      {
+        "label": "Not in the US",
+        "value": 0.0776
+      },
+      {
+        "label": "Other",
+        "value": 0.1855
+      },
+      {
+        "label": "Not stated",
+        "value": 0.1133
+      }
+    ]
+  }
+}

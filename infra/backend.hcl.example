@@ -1,0 +1,4 @@
+bucket         = "REPLACE-house-terraform-state"
+dynamodb_table = "REPLACE-house-terraform-locks"
+key            = "ml-visa-approval/prod/terraform.tfstate"
+region         = "us-east-1"

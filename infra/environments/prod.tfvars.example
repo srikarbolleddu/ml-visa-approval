@@ -1,0 +1,6 @@
+app_name    = "ml-visa-approval"
+environment = "prod"
+image_tag   = "bootstrap" # first apply only; the Deploy workflow owns the image after that
+
+github_oidc_provider_arn = "arn:aws:iam::<account-id>:oidc-provider/token.actions.githubusercontent.com"
+github_repo              = "srikarbolleddu/ml-visa-approval"
