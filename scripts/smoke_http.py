@@ -2,6 +2,7 @@
 
 import json
 import sys
+import time
 import urllib.error
 import urllib.request
 from typing import Any
@@ -10,6 +11,7 @@ BASE = sys.argv[1].rstrip("/") + "/api/v1"
 
 
 def call(path: str, body: dict | None = None) -> tuple[int, Any]:
+    time.sleep(0.3)  # stay under the API Gateway burst limit; this tests the API, not the throttle
     data = json.dumps(body).encode() if body is not None else None
     request = urllib.request.Request(
         BASE + path, data=data, headers={"content-type": "application/json"}

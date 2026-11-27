@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@srikarbolleddu/ml-demo-kit": "https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.1/srikarbolleddu-ml-demo-kit-0.1.1.tgz",
+    "@srikarbolleddu/ml-demo-kit": "https://github.com/srikarbolleddu/ml-demo-kit/releases/download/v0.1.2/srikarbolleddu-ml-demo-kit-0.1.2.tgz",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
