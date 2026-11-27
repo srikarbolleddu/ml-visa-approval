@@ -1,6 +1,6 @@
 # infra/ — Terraform → AWS (Lambda)
 
-Deploys as a **container-image Lambda function** behind an **API Gateway HTTP API** with stage throttling: the hard abuse ceiling for this public demo. The account's Lambda concurrency pool is small (10) and shared with other services, so reserved concurrency isn't available; the gateway throttle keeps the demo from ever saturating it. Region **us-east-2**; Terraform state lives in the shared house backend (us-east-1).
+Deploys as a **container-image Lambda function** behind an **API Gateway HTTP API** with stage throttling: the hard abuse ceiling for this public demo. The account's Lambda concurrency pool is small (10) and shared with other services, so reserved concurrency isn't available; the gateway's burst limit caps simultaneous cold starts. With three demo stacks at burst 3 the worst case briefly nearly fills the pool, so don't add stacks or raise bursts until the account's concurrency quota is increased. Region **us-east-2**; Terraform state lives in the shared house backend (us-east-1).
 
 ## One-time account setup (do this once, not per app)
 

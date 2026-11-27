@@ -96,8 +96,11 @@ resource "aws_lambda_function" "app" {
 # --- Public HTTPS endpoint: API Gateway HTTP API (not a raw Function URL) ---
 # The gateway's stage throttling is the hard abuse ceiling for this public demo. Reserved
 # concurrency can't be used: this account's Lambda concurrency limit is 10, all of which must stay
-# unreserved -- and that pool is shared with the portfolio's own services, so the demo must never
-# be able to saturate it.
+# unreserved -- and that pool is shared with the portfolio's own services. Concurrency ~= requests/s
+# x duration; warm requests take ~20ms, so only simultaneous cold starts matter, and the stage
+# burst caps those. With three demo stacks at burst 3, a worst case of 9 simultaneous cold starts
+# can briefly (~3s) nearly fill the pool. Don't add more stacks or raise bursts until the account's
+# concurrency quota is increased.
 
 resource "aws_apigatewayv2_api" "http" {
   name          = local.name
